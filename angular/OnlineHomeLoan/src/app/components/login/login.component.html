@@ -1,0 +1,87 @@
+<!-- <div class="login-Layer">
+    <span class="Title-Text">Login</span>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmitted()">
+        <div class="form-Data">
+            <div class="username-Info">
+                <span>Username</span>
+                <input formControlName="email" />
+                <span *ngIf="Email.errors?.['required'] && (Email.dirty||Email.touched)">
+                    username is required
+                </span>
+                <span *ngIf="Email.errors?.['email'] && (Email.dirty||Email.touched)">
+                    username is invalid
+                </span>
+            </div>
+            <div class="password-Info">
+                <span>Password</span>
+                <input formControlName="password" />
+                <span *ngIf="Password.errors?.['required'] && (Password.dirty||Password.touched)">
+                    password is required
+                </span>
+                <span
+                    *ngIf="Password.errors?.['minlength'] || Password.errors?.['maxlength'] && (Password.dirty||Password.touched)">
+                    password is not valid
+                </span>
+            </div>
+            <button class="LoginButton" [disabled]="loginForm.invalid">Login</button>
+        </div>
+    </form>
+    <span>Don't have an account ? click here =><a routerLink="/register">Register</a></span>
+</div> -->
+
+<div class="Login-Layer">
+    <ul class="nav nav-tabs role-Layer" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#user">User</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#admin">Admin</a>
+        </li>
+    </ul>
+    <div class="tab-content form-Layer">
+        <div id="user" class="container tab-pane active"><br>
+            <form [formGroup]="loginForm" (ngSubmit)="loginSubmitted()">
+                <div class="form-Data">
+                    <div class="username-Info">
+                        <span>Username</span>
+                        <input formControlName="email" />
+                        <span class="error-Text" *ngIf="Email.errors?.['required'] && (Email.dirty||Email.touched)">
+                            username is required
+                        </span>
+                        <span class="error-Text" *ngIf="Email.errors?.['email'] && (Email.dirty||Email.touched)">
+                            username is invalid
+                        </span>
+                    </div>
+                    <div class="password-Info">
+                        <span>Password</span>
+                        <input formControlName="password" />
+                        <span class="error-Text"
+                            *ngIf="Password.errors?.['required'] && (Password.dirty||Password.touched)">
+                            password is required
+                        </span>
+                        <span class="error-Text"
+                            *ngIf="Password.errors?.['minlength'] || Password.errors?.['maxlength'] && (Password.dirty||Password.touched)">
+                            password is not valid
+                        </span>
+                    </div>
+                    <button class="LoginButton" [disabled]="loginForm.invalid">login</button>
+                </div>
+            </form>
+        </div>
+        <div id="admin" class="container tab-pane fade"><br>
+            <form>
+                <div class="form-Data">
+                    <div class="username-Info">
+                        <span>Username</span>
+                        <input />
+                    </div>
+                    <div class="password-Info">
+                        <span>Password</span>
+                        <input />
+                    </div>
+                    <button class="LoginButton">login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
