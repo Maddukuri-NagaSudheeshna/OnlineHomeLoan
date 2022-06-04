@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,14 +16,29 @@ import { FeaturesComponent } from './components/features/features.component';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, HomeComponent, PageNotFoundComponent, LoginhomeComponent, AboutComponent, FeaturesComponent, CalculatorComponent, FaqComponent, ContactusComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    LoginComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    LoginhomeComponent,
+    AboutComponent,
+    FeaturesComponent,
+    CalculatorComponent,
+    FaqComponent,
+    ContactusComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    Ng5SliderModule,
+    FormsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
