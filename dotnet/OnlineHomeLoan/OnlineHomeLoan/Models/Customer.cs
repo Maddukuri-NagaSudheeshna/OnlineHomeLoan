@@ -7,9 +7,9 @@
 
         public string ? Organization { get; set; }
 
-        public int MonthlyIncome { get; set; }
+        public long MonthlyIncome { get; set; }
 
-        public int LoanAmount { get; set; }
+        public long LoanAmount { get; set; }
 
         public int Tenure { get; set; }
 
@@ -20,10 +20,12 @@
 
         public string ? DateOfBirth { get; set; }
 
-        public int MobileNumber  { get; set; }
+        public long MobileNumber  { get; set; }
 
-        public int Adhaar { get; set; }
+        public long Adhaar { get; set; }
 
-        public int Pan { get; set; }
+        public string ? Pan { get; set; }
+
+        public string ? Status { get; set; }
     }
 }

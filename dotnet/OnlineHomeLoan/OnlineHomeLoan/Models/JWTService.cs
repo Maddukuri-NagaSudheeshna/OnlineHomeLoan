@@ -42,5 +42,26 @@ namespace OnlineHomeLoan.Models
 
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);
         }
+
+        public string GenerateAdminToken(string id,string email)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.SecretKey));
+            var signature = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var payload = new[]
+            {
+                new Claim("id",id),
+                  new Claim("email",email),
+            };
+
+            var jwtToken = new JwtSecurityToken(
+                issuer: "localhost",
+                audience: "localhost",
+                claims: payload,
+                expires: DateTime.Now.AddMinutes(TokenDuration),
+                signingCredentials: signature
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+        }
     }
 }

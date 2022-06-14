@@ -51,6 +51,21 @@ namespace OnlineHomeLoan.Controllers
             return Ok("Failure");
         }
 
+        [AllowAnonymous]
+        [HttpPost("AdminLogin")]
+        public IActionResult AdminLogin(AdminForm admin)
+        {
+            var adminAvailable=_context.AdminLogin.Where(a=>a.AdminEmailID==admin.AdminEmailID && a.AdminPassword==admin.AdminPassword).FirstOrDefault();
+           if(adminAvailable!=null)
+            {
+                return Ok(new JWTService(_config).GenerateAdminToken(
+                    adminAvailable.AdminID.ToString(),
+                    adminAvailable.AdminEmailID
+                    ));
+            }
+            return Ok("Failure");
+        }
+
         [HttpPost("CustomerApplication")]
         public IActionResult customerApplication(Customer cust)
         {

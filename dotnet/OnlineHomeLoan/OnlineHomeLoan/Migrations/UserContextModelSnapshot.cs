@@ -22,6 +22,25 @@ namespace OnlineHomeLoan.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("OnlineHomeLoan.Models.Admin", b =>
+                {
+                    b.Property<int>("AdminID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminID"), 1L, 1);
+
+                    b.Property<string>("AdminEmailID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminID");
+
+                    b.ToTable("AdminLogin");
+                });
+
             modelBuilder.Entity("OnlineHomeLoan.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
@@ -30,8 +49,8 @@ namespace OnlineHomeLoan.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"), 1L, 1);
 
-                    b.Property<int>("Adhaar")
-                        .HasColumnType("int");
+                    b.Property<long>("Adhaar")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("DateOfBirth")
                         .HasColumnType("nvarchar(max)");
@@ -48,20 +67,23 @@ namespace OnlineHomeLoan.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LoanAmount")
-                        .HasColumnType("int");
+                    b.Property<long>("LoanAmount")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("MobileNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("MobileNumber")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("MonthlyIncome")
-                        .HasColumnType("int");
+                    b.Property<long>("MonthlyIncome")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Organization")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Pan")
-                        .HasColumnType("int");
+                    b.Property<string>("Pan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Tenure")
                         .HasColumnType("int");

@@ -17,6 +17,8 @@ import { CalculatorComponent } from './components/calculator/calculator.componen
 import { FaqComponent } from './components/faq/faq.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { AdminhomeComponent } from './components/adminhome/adminhome.component';
+import { LoantrackingComponent } from './components/loantracking/loantracking.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     CalculatorComponent,
     FaqComponent,
     ContactusComponent,
+    AdminhomeComponent,
+    LoantrackingComponent,
   ],
   imports: [
     BrowserModule,

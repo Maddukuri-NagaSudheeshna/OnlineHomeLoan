@@ -140,3 +140,20 @@
     }
   }
 }
+
+.userLogin-Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: rgb(215, 215, 240);
+  padding: 15px 60px 0px 0px;
+  button {
+    font-size: 18px;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    color: rgb(75, 70, 9);
+    padding: 3px 15px 3px 15px;
+    border-radius: 8px;
+  }
+}

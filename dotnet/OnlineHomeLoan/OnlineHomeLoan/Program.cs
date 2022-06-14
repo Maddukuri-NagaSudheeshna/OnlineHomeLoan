@@ -22,7 +22,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidIssuer = "localhost",
         ValidAudience = "localhost",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwtConfig:Key"])),
-        ClockSkew=TimeSpan.Zero
+        ClockSkew=TimeSpan.FromMinutes(30),
     };
 });
 

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
+import { AdminhomeComponent } from './components/adminhome/adminhome.component';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoantrackingComponent } from './components/loantracking/loantracking.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginhomeComponent } from './components/loginhome/loginhome.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -48,6 +50,16 @@ const routes: Routes = [
   {
     path: 'customerhome',
     component: LoginhomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'adminhome',
+    component: AdminhomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'loantracking',
+    component: LoantrackingComponent,
     canActivate: [AuthGuard],
   },
   {

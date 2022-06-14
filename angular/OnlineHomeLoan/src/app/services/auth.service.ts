@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Customer } from './customer.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,27 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   currentUser: BehaviorSubject<any> = new BehaviorSubject(null);
+  currentAdmin: BehaviorSubject<any> = new BehaviorSubject(null);
   baseUrl = 'https://localhost:7167/api/';
   jwtHelperService = new JwtHelperService();
+
+  listCustomer: Customer[] = []; //fot getting data customer details
+
+  customerData: Customer = new Customer(); //for post/insert and update/put data
+
+  getCustomers() { //used for take collection of data
+    this.http
+      .get(this.baseUrl + 'Customer')
+      .toPromise()
+      .then((res) => (this.listCustomer = res as Customer[]));
+  }
+
+  updateStatus() { //updating the status
+    return this.http.put(
+      `${this.baseUrl + 'Customer'}/${this.customerData.customerID}`,
+      this.customerData
+    );
+  }
 
   registerUser(user: Array<String>) {
     return this.http.post(
@@ -42,9 +62,28 @@ export class AuthService {
     );
   }
 
+  adminUser(adminInfo: Array<String>) {
+    return this.http.post(
+      this.baseUrl + 'User/AdminLogin',
+      {
+        AdminEmailID: adminInfo[0],
+        AdminPassword: adminInfo[1],
+      },
+      {
+        responseType: 'text',
+      }
+    );
+  }
+
   setToken(token: string) {
     localStorage.setItem('access_token', token);
     this.loadCurrentUser();
+    return token;
+  }
+
+  setAdminToken(token: string) {
+    localStorage.setItem('admin_token', token);
+    this.loadCurrentAdmin();
     return token;
   }
 
@@ -65,12 +104,36 @@ export class AuthService {
     return userInfo.firstname;
   }
 
+  loadCurrentAdmin() {
+    const token = localStorage.getItem('admin_token');
+    const adminInfo =
+      token != null ? this.jwtHelperService.decodeToken(token) : null;
+    const data = adminInfo
+      ? {
+          id: adminInfo.id,
+          email: adminInfo.email,
+        }
+      : null;
+    this.currentAdmin.next(data);
+  }
+
   isLoggedIn(): boolean {
-    return localStorage.getItem('access_token') ? true : false;
+    return localStorage.getItem('access_token') ||
+      localStorage.getItem('admin_token')
+      ? true
+      : false;
+  }
+
+  isActive() {
+    return localStorage.getItem('access_token');
   }
 
   removeToken() {
     localStorage.removeItem('access_token');
+  }
+
+  removeAdminToken() {
+    localStorage.removeItem('admin_token');
   }
 
   loanAplication(cust: Array<String>) {

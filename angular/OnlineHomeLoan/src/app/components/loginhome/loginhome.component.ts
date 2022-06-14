@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-loginhome',
@@ -16,19 +17,61 @@ export class LoginhomeComponent implements OnInit {
   DisplayText: string = '';
   isApplicationCreated: boolean = false;
 
+  alertWithSuccess() {
+    Swal.fire(
+      'Thank You',
+      this.isApplicationCreated
+        ? 'Your Application is Submitted Successfully !'
+        : 'Application is Already Submitted !',
+      'success'
+    );
+  }
+
   customerForm = new FormGroup({
     employment: new FormControl('', [Validators.required]),
     organization: new FormControl('', [Validators.required]),
-    monthlyincome: new FormControl('', [Validators.required]),
-    loanamount: new FormControl('', [Validators.required]),
-    tenure: new FormControl('', [Validators.required]),
-    firstname: new FormControl('', [Validators.required]),
-    lastname: new FormControl('', [Validators.required]),
+    monthlyincome: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[0-9]*$'),
+      Validators.minLength(5),
+      Validators.maxLength(8),
+    ]),
+    loanamount: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(8),
+    ]),
+    tenure: new FormControl('', [
+      Validators.required,
+      Validators.pattern('([1-9]|1[0-9]|20)'),
+    ]),
+    firstname: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z ]*$'),
+    ]),
+    lastname: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z ]*$'),
+    ]),
     gender: new FormControl('', [Validators.required]),
     dob: new FormControl('', [Validators.required]),
-    mobilenumber: new FormControl('', [Validators.required]),
-    adhaar: new FormControl('', [Validators.required]),
-    pan: new FormControl('', [Validators.required]),
+    mobilenumber: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[0-9]*$'),
+      Validators.minLength(10),
+      Validators.maxLength(10),
+    ]),
+    adhaar: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[0-9]*$'),
+      Validators.minLength(12),
+      Validators.maxLength(12),
+    ]),
+    pan: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+    ]),
   });
 
   customerSubmitted() {
@@ -53,7 +96,7 @@ export class LoginhomeComponent implements OnInit {
             this.DisplayText = 'Application Submitted Successfully';
             this.isApplicationCreated = true;
           } else if (res == 'Already Exist') {
-            this.DisplayText = 'Application already created and submitted';
+            this.DisplayText = 'Application already submitted';
             this.isApplicationCreated = false;
           } else {
             this.DisplayText = 'Something went wrong';

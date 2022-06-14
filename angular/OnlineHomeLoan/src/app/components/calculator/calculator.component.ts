@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 declare const Calculate: any;
-declare const calcData: any;
 
 @Component({
   selector: 'app-calculator',
